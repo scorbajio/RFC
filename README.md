@@ -8,7 +8,7 @@ The Merkle Patricia Trie (MPT) data structure is an essential part of the Ethere
 
 An [MPT](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) stores key-value data by breaking down keys into smaller chunks, such as nibbles, which are used to construct nodes down to the leaf node where the value is stored. Data lookup begins at the root node, querying by hash to reveal child nodes, which are organized by the subsequent nibble in the key. This process continues through intermediate nodes until the leaf node with the desired state data is reached. On the Ethereum mainnet, this method typically requires 7-8 internal node lookups and multiple disk accesses to retrieve a single key [1]. A traditional MPT offers O(logn) complexity for lookups, modifications, insertions, deletions, and verification.
 
-Storing data in a flat key-value mapping can drastically reduce lookup time from O(log n) to O(1) by minimizing the number of disk accesses. However, this approach makes data verification computationally inefficient, as any modification would invalidate all subsequent hashes, necessitating a full rehash of the dataset.
+Storing data in a flat key-value mapping can drastically reduce lookup time from O(log n) to O(1) by minimizing the number of disk accesses. However, this approach makes data verification computationally inefficient, as an insertion or deletion operation would invalidate all subsequent hashes necessitating a full rehash of the dataset, since there is no hierarchical path to leverage. A change in any single key-value pair does not have a localized impact but rather affects the entire dataset.
 
 ### Goals ###
 
