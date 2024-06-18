@@ -2,12 +2,6 @@
 
 ### Abstract ###
 
-The Merkle Patricia Trie (MPT) data structure is an essential part of the Ethereum network and is used to store network state such as accounts and storage as key-value pairs. Although the data structure lends itself well to efficiently producing cryptographic proofs of data for quick verification, looking up a key is slow and usually takes several database lookups since data is stored in layers of nodes that need to be looked up one-by-one in order to fully query a single key-value pair for meaningful data. Flattening the MPT data structure by keeping data as simple key-value pairs would be much more efficient, but verifying the data would become computationally inefficient since changes to data would invalidate all calculated hashes and we'd need to recalculate them from scratch. This change proposes a different method of organizing key-value data in a flat MPT structure by key prefix, in order to have logarithmic complexity for modifications, insertions, deletions, and verification.
-
-## Flattening the Merkle Patricia Trie Data Structure ##
-
-### Abstract ###
-
 The Merkle Patricia Trie (MPT) data structure is an essential part of the Ethereum network and is used to store network state such as accounts and storage as key-value pairs. Although the data structure lends itself well to efficiently producing cryptographic proofs of data for quick verification, looking up a key is slow and usually takes several database lookups since in a non-flat, tree-like MPT,  data is stored in layers of nodes that need to be looked up one-by-one in order to fully query a single key-value pair for meaningful data. Flattening the MPT data structure by keeping data as simple key-value pairs would be much more efficient, but verifying the data would become computationally inefficient since changes to data would invalidate all calculated intermediate node hashes and we'd need to recalculate them from scratch. This change proposes a different method of organizing key-value data in a flat MPT structure by key prefix, ensuring logarithmic complexity for modifications, insertions, deletions, and verification, as well as constant time key lookups, although with the added overhead of additional memory usage for keeping two sets of data, including the leaf data that contains meaningful data about network state, and also the calculated set of nodes used for proof creation and verification of data.
 
 ### Introduction ###
